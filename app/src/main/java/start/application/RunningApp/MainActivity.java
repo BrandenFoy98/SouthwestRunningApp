@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        TextView ShowEmailt = (TextView) findViewById(R.id.ShowEmail);
+        TextView ShowEmailt = findViewById(R.id.ShowEmail);
         String hello = "You are logged in as";
 
         if(user != null) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        Button signOut = (Button) findViewById(R.id.sign_out);
+        Button signOut = findViewById(R.id.sign_out);
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

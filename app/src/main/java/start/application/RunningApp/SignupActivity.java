@@ -9,7 +9,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.application.RunningApp.R;
@@ -22,7 +21,6 @@ public class SignupActivity extends AppCompatActivity {
     Button btn2_signup;
     EditText user_name, pass_word;
     FirebaseAuth mAuth;
-    private ProgressBar progressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +29,7 @@ public class SignupActivity extends AppCompatActivity {
         user_name = findViewById(R.id.username);
         pass_word = findViewById(R.id.password1);
         btn2_signup = findViewById(R.id.sign);
-        progressbar = findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
-
-
         btn2_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,20 +59,15 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),"Registration successful!", Toast.LENGTH_LONG).show();
-                            // hide the progress bar
-                            progressbar.setVisibility(View.GONE);
+                            Toast.makeText(SignupActivity.this.getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                             // if the user created intent to login activity
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
                         else {
                             // Registration failed
-                            Toast.makeText(getApplicationContext(),
-                                    "Registration failed!!" + " Please try again later", Toast.LENGTH_LONG).show();
-                            // hide the progress bar
-                            progressbar.setVisibility(View.GONE);
-
+                            Toast.makeText(SignupActivity.this.getApplicationContext(), "Registration failed!!\n" +
+                                    "You may have an existing account.\n" + "Please try Logging in", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

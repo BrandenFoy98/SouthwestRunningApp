@@ -27,40 +27,36 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(v -> {
             String email= user_name.getText().toString().trim();
             String password=pass_word.getText().toString().trim();
-            if(email.isEmpty())
-            {
+            if(email.isEmpty()) {
                 user_name.setError("Email is empty");
                 user_name.requestFocus();
                 return;
             }
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            {
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 user_name.setError("Enter the valid email");
                 user_name.requestFocus();
                 return;
             }
-            if(password.isEmpty())
-            {
+            if(password.isEmpty()) {
                 pass_word.setError("Password is empty");
                 pass_word.requestFocus();
                 return;
             }
-            if(password.length()<6)
-            {
+            if(password.length()<6) {
                 pass_word.setError("Length of password is more than 6");
                 pass_word.requestFocus();
                 return;
             }
+
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
                 if(task.isSuccessful())
                 {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this,
-                            "Please Check Your login Credentials",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please Check Your login Credentials", Toast.LENGTH_SHORT).show();
                 }
 
             });
