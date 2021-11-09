@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+    public void launchMakeWorkoutView(View view) {
+        startActivity(new Intent(this, MakeWorkoutListActivity.class));
+    }
+    public void launchGetWorkoutListView(View view) {
+        startActivity(new Intent(this, GetWorkoutActivity.class));
+    }
 }
-
-
