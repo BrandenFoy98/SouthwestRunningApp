@@ -2,15 +2,19 @@ package start.application.RunningApp;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.application.RunningApp.R;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,9 +62,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void signOut() {
+
         auth.signOut();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
