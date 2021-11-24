@@ -1,48 +1,39 @@
 package start.application.RunningApp;
 
-import androidx.annotation.NonNull;
+import com.google.firebase.firestore.Exclude;
 
+import java.io.Serializable;
 
-public class Workout {
-    private String day;
-    private int distance;
-    private String description;
+public class Workout implements Serializable{
+
+    @Exclude private String id;
+
+    private String name, description;
 
     public Workout() {
+
     }
 
-    public Workout(String day, String description, int distance) {
-        this.day = day;
+    public Workout(String name, String description) {
+        this.name = name;
         this.description = description;
-        this.distance = distance;
     }
 
-    public String getDay() {
-        return day;
+    public String getId() {
+        return id;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setId(String id) {
+        this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return this.description + " " + this.day + " " + this.distance;
-    }
 }

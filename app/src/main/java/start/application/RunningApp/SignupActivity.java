@@ -1,15 +1,17 @@
 package start.application.RunningApp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.application.RunningApp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     Button btn2_signup;
     EditText user_name, pass_word;
     FirebaseAuth mAuth;
+    CheckBox isCoachBox, isRunnerBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,29 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         user_name = findViewById(R.id.username);
         pass_word = findViewById(R.id.password1);
+        isCoachBox = findViewById(R.id.checkBox);
+        isRunnerBox = findViewById(R.id.checkBox2);
         btn2_signup = findViewById(R.id.sign);
         mAuth = FirebaseAuth.getInstance();
+
+        isRunnerBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    isCoachBox.setChecked(false);
+                }
+            }
+        });
+
+        isCoachBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    isRunnerBox.setChecked(false);
+                }
+            }
+        });
+
         btn2_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +79,16 @@ public class SignupActivity extends AppCompatActivity {
                     pass_word.requestFocus();
                     return;
                 }
+                if (!(isCoachBox.isChecked() || isRunnerBox.isChecked())) {
+                    Toast.makeText(SignupActivity.this.getApplicationContext(), "Check a Box", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+
+
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {

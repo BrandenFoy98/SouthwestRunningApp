@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         rImage = findViewById(R.id.rImage);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -125,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchMakeWorkoutView(View view) {
-        startActivity(new Intent(this, MakeWorkoutListActivity.class));
+        startActivity(new Intent(this, MakeWorkout.class));
     }
     public void launchGetWorkoutListView(View view) {
-        startActivity(new Intent(this, GetWorkoutActivity.class));
+        startActivity(new Intent(this, GetWorkout.class));
     }
 }
