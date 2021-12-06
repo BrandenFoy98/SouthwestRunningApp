@@ -119,8 +119,7 @@ public class UploadPicturesActivity extends AppCompatActivity {
 
     private void uploadFile() {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -135,10 +134,13 @@ public class UploadPicturesActivity extends AppCompatActivity {
                             }, 500);
 
                             Toast.makeText(UploadPicturesActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                    Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl().toString());
-                            String uploadId = mDatabaseRef.collection("uploads").getId();
-                            mDatabaseRef.collection(uploadId).add(upload);
+                            taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(uri -> {
+                                Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+                                        uri.toString()
+//                                    Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl().toString()
+                                );
+                                mDatabaseRef.collection("uploads").add(upload);
+                            } );
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

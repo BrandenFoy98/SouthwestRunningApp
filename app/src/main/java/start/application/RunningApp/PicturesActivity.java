@@ -63,7 +63,7 @@ public class PicturesActivity extends AppCompatActivity {
                             for (DocumentSnapshot d : list) {
 
                                 Upload p = d.toObject(Upload.class);
-                                p.setImageUrl(d.getId());
+//                                p.setImageUrl(d.getId());
                                 mUploads.add(p);
 
                             }
