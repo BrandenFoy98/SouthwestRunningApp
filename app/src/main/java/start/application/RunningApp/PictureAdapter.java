@@ -38,7 +38,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ImageVie
         Upload uploadCurrent = mUploads.get(position);
         holder.textViewName.setText(uploadCurrent.getName());
         Picasso.get()
-                .load(uploadCurrent.getImageUrl())
+                .load(uploadCurrent.getImageUri())
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);

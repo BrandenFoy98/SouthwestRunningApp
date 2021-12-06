@@ -4,20 +4,20 @@ import com.google.firebase.database.Exclude;
 
 public class Upload {
     private String mName;
-    private String mImageUrl;
+    private String mImageUri;
     private String mKey;
 
     public Upload() {
         //empty constructor needed
     }
 
-    public Upload(String name, String imageUrl) {
+    public Upload(String name, String imageUri) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
 
         mName = name;
-        mImageUrl = imageUrl;
+        mImageUri = imageUri;
     }
 
     public String getName() {
@@ -28,12 +28,12 @@ public class Upload {
         mName = name;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public String getImageUri() {
+        return mImageUri;
     }
 
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public void setImageUri(String imageUri) {
+        mImageUri = imageUri;
     }
 
     @Exclude
