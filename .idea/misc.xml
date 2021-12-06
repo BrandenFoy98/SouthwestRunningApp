@@ -6,19 +6,29 @@
         <entry key="app/src/main/res/drawable/button_back.xml" value="0.1814814814814815" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.17592592592592593" />
         <entry key="app/src/main/res/drawable/edittext_background.xml" value="0.17592592592592593" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.21296296296296297" />
+        <entry key="app/src/main/res/layout-w936dp/activity_main2.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_coach.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_edit_workout.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_get_workout.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.32055883094855797" />
+        <entry key="app/src/main/res/layout/activity_get_workout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_get_workout_runner.xml" value="0.1453804347826087" />
+        <entry key="app/src/main/res/layout/activity_get_workout_runners.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_make_workout.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/activity_makeworkout_list.xml" value="0.15070921985815602" />
-        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.23776171793487766" />
+        <entry key="app/src/main/res/layout/activity_pictures.xml" value="0.1453804347826087" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_update_workout.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/activity_upload_pictures.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_workout.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_workout_list.xml" value="0.10094524340122585" />
         <entry key="app/src/main/res/layout/activity_workouts.xml" value="0.1157548125633232" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/image_item.xml" value="0.1453804347826087" />
         <entry key="app/src/main/res/layout/layout_product.xml" value="0.165" />
+        <entry key="app/src/main/res/menu/searchmenu.xml" value="0.28425925925925927" />
       </map>
     </option>
   </component>

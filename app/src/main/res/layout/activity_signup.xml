@@ -31,21 +31,21 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/coachBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
         android:minHeight="48dp"
         android:text="Coach"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password1" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/runnerBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:minHeight="48dp"
         android:text="Runner"
@@ -56,12 +56,14 @@
         android:id="@+id/sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:minHeight="48dp"
         android:text="SIGN UP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/coachBox" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

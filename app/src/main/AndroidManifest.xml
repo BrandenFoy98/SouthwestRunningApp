@@ -10,10 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="start.application.RunningApp.PicturesActivity"
+            android:exported="false" />
+        <activity
+            android:name="start.application.RunningApp.UploadPicturesActivity"
+            android:exported="false" />
+        <activity
+            android:name="start.application.RunningApp.CoachActivity"
+            android:exported="false" />
+        <activity
             android:name="start.application.RunningApp.UpdateWorkout"
             android:exported="false" />
         <activity
             android:name="start.application.RunningApp.GetWorkout"
+            android:exported="false" />
+        <activity
+            android:name="start.application.RunningApp.GetWorkoutRunner"
             android:exported="false" />
         <activity
             android:name="start.application.RunningApp.MakeWorkout"
@@ -22,10 +34,10 @@
             android:name="start.application.RunningApp.SignupActivity"
             android:exported="true" />
         <activity
-            android:name="start.application.RunningApp.LoginActivity"
+            android:name="start.application.RunningApp.MainActivity"
             android:exported="true" />
         <activity
-            android:name="start.application.RunningApp.MainActivity"
+            android:name="start.application.RunningApp.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

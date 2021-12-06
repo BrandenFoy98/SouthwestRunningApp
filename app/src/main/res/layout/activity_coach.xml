@@ -4,19 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="start.application.RunningApp.MainActivity">
+    tools:context="start.application.RunningApp.CoachActivity">
 
     <TextView
         android:id="@+id/helloworld"
         android:layout_width="350dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="28dp"
         android:text="@string/SouthwestAbout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <ImageView
         android:id="@+id/rImage"
@@ -39,6 +38,24 @@
         app:layout_constraintVertical_bias="0.953" />
 
     <Button
+        android:id="@+id/makeworkoutListButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="111dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="162dp"
+        android:onClick="launchMakeWorkoutView"
+        android:text="@string/makeworkout_view"
+        android:textColor="#000000"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rImage" />
+
+    <Button
         android:id="@+id/getworkoutListButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="111dp"
@@ -51,9 +68,8 @@
         android:textColor="#000000"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/makeworkoutListButton"
         app:layout_constraintTop_toBottomOf="@+id/rImage" />
 
     <Button
@@ -61,17 +77,14 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="111dp"
         android:layout_height="59dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="44dp"
         android:onClick="launchUploadPictures"
         android:text="@string/pictures_upload"
         android:textColor="#000000"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getworkoutListButton" />
 
     <Button
@@ -88,7 +101,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

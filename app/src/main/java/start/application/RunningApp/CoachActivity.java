@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 
-public class MainActivity extends AppCompatActivity {
+public class CoachActivity extends AppCompatActivity {
 
     ImageView rImage;
 
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_coach);
         rImage = findViewById(R.id.rImage);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // we are showing that error message in toast
-                Toast.makeText(MainActivity.this, "Error Loading Image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CoachActivity.this, "Error Loading Image", Toast.LENGTH_SHORT).show();
             }
         });
         //get firebase auth instance
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    startActivity(new Intent(CoachActivity.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -124,8 +124,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void launchMakeWorkoutView(View view) {
+        startActivity(new Intent(this, MakeWorkout.class));
+    }
     public void launchGetWorkoutListView(View view) {
-        startActivity(new Intent(this, GetWorkoutRunner.class));
+        startActivity(new Intent(this, GetWorkout.class));
     }
 
     public void launchUploadPictures(View view) {

@@ -25,12 +25,12 @@ public class Workout implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+
     }
 
     public String getName() {
         return name;
     }
-
 
     public String getDescription() {
         return description;

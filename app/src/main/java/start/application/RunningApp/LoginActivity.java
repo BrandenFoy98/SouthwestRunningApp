@@ -1,29 +1,42 @@
 package start.application.RunningApp;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.application.RunningApp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText user_name, pass_word;
+    Button btn_login;
+    Button btn_sign;
     FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-        user_name=findViewById(R.id.email);
-        pass_word=findViewById(R.id.password);
-        Button btn_login = findViewById(R.id.btn_login);
-        Button btn_sign = findViewById(R.id.btn_signup);
-        mAuth=FirebaseAuth.getInstance();
+        user_name = findViewById(R.id.email);
+        pass_word = findViewById(R.id.password);
+        btn_login = findViewById(R.id.btn_login);
+        btn_sign = findViewById(R.id.btn_signup);
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
         btn_login.setOnClickListener(v -> {
             String email= user_name.getText().toString().trim();
             String password=pass_word.getText().toString().trim();
@@ -48,19 +61,38 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
+            mAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    checkUserAccessLevel(authResult.getUser().getUid());
+                }
+            });
+
+            });
+        btn_sign.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, SignupActivity.class )));
+
+    }
+
+    private void checkUserAccessLevel(String uid) {
+        DocumentReference df = fStore.collection("users").document(uid);
+        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
+
+                if(documentSnapshot.getString("isCoach") != null) {
+                    startActivity(new Intent(LoginActivity.this, CoachActivity.class));
+                    finish();
+                }
+
+                if(documentSnapshot.getString("isRunner") != null) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "Please Check Your login Credentials", Toast.LENGTH_SHORT).show();
-                }
 
-            });
+            }
         });
-        btn_sign.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, SignupActivity.class )));
     }
+
 
 }

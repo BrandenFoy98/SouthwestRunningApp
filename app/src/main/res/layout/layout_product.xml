@@ -32,6 +32,13 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
+            <CheckBox
+                android:id="@+id/workoutCompleted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Completed" />
+
 
         </LinearLayout>
 
