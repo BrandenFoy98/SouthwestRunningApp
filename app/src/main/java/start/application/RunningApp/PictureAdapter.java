@@ -34,6 +34,15 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ImageVie
         return new ImageViewHolder(v);
     }
 
+    public void filterList(List<Upload> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mUploads = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         Upload uploadCurrent = mUploads.get(position);

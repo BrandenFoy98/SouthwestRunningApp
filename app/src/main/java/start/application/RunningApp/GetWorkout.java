@@ -32,8 +32,6 @@ public class GetWorkout extends AppCompatActivity {
     private WorkoutAdapter adapter;
     private List<Workout> productList;
     private ProgressBar progressBar;
-
-
     private FirebaseFirestore db;
 
     @Override
@@ -76,11 +74,8 @@ public class GetWorkout extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
 
                         }
-
-
                     }
                 });
-
     }
 
     @Override

@@ -75,17 +75,11 @@ public class GetWorkoutRunner extends AppCompatActivity {
                                 Workout p = d.toObject(Workout.class);
                                 p.setId(d.getId());
                                 productList.add(p);
-
                             }
-
                             adapter.notifyDataSetChanged();
-
                         }
-
-
                     }
                 });
-
     }
 
     @Override
@@ -102,7 +96,6 @@ public class GetWorkoutRunner extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
-
 
     public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ProductViewHolder> {
 
@@ -136,9 +129,8 @@ public class GetWorkoutRunner extends AppCompatActivity {
         }
 
         class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            FirebaseFirestore db2 = FirebaseFirestore.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DocumentReference df = db2.collection("complete").document(user.getUid());
+            DocumentReference df = db.collection("products").document(user.getUid());
 
             TextView textViewName, textViewDesc;
             CheckBox complete;
@@ -159,7 +151,6 @@ public class GetWorkoutRunner extends AppCompatActivity {
                             userInfo2.put("workoutCompleted", true);
                             String msg = "You have checked this Check it Checkbox.";
                             Toast.makeText(GetWorkoutRunner.this, msg, Toast.LENGTH_SHORT).show();
-
                         }
 
                         if (!(complete.isChecked())) {
@@ -174,7 +165,6 @@ public class GetWorkoutRunner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Workout product = productList.get(getAdapterPosition());
-
             }
         }
     }
