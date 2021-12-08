@@ -1,29 +1,24 @@
 package start.application.RunningApp;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.RunningApp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,25 +27,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class GetWorkoutRunner extends AppCompatActivity {
+public class CompletedWorkoutsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private WorkoutAdapter adapter;
+    private CompletedWorkoutAdapter adapter;
     private List<Workout> productList;
     private ProgressBar progressBar;
-    CheckBox complete;
 
     private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_workout);
+        setContentView(R.layout.activity_completed_workouts);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressBar = findViewById(R.id.progressbar);
@@ -58,10 +49,8 @@ public class GetWorkoutRunner extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         productList = new ArrayList<>();
-        adapter = new WorkoutAdapter(this, productList);
-        complete = findViewById(R.id.workoutCompleted);
+        adapter = new CompletedWorkoutAdapter(this, productList);
         recyclerView.setAdapter(adapter);
-
         db = FirebaseFirestore.getInstance();
 
         db.collection("products").get()
@@ -102,12 +91,12 @@ public class GetWorkoutRunner extends AppCompatActivity {
         return true;
     }
 
-    public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ProductViewHolder> {
+    public class CompletedWorkoutAdapter extends RecyclerView.Adapter<CompletedWorkoutAdapter.ProductViewHolder> {
 
         private Context mCtx;
         private List<Workout> productList;
 
-        public WorkoutAdapter(Context mCtx, List<Workout> productList) {
+        public CompletedWorkoutAdapter(Context mCtx, List<Workout> productList) {
             this.mCtx = mCtx;
             this.productList = productList;
         }
@@ -116,7 +105,7 @@ public class GetWorkoutRunner extends AppCompatActivity {
         @Override
         public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new ProductViewHolder(
-                    LayoutInflater.from(mCtx).inflate(R.layout.layout_product, parent, false)
+                    LayoutInflater.from(mCtx).inflate(R.layout.layout_product2, parent, false)
             );
         }
 
@@ -134,41 +123,24 @@ public class GetWorkoutRunner extends AppCompatActivity {
         }
 
         class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DocumentReference df = db.collection("completed").document(db.collection("products").document().getId());
 
             TextView textViewName, textViewDesc;
-            CheckBox complete;
 
             public ProductViewHolder(View itemView) {
                 super(itemView);
-                Map<String, String> userInfo2 = new HashMap<>();
 
                 textViewName = itemView.findViewById(R.id.textview_name);
                 textViewDesc = itemView.findViewById(R.id.textview_desc);
-                complete = itemView.findViewById(R.id.workoutCompleted);
 
                 itemView.setOnClickListener(this);
-                complete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (complete.isChecked()) {
-                            userInfo2.put("user_name", user.getEmail());
-                        }
-
-                        if (!(complete.isChecked())) {
-                            userInfo2.remove("user_name", user.getEmail());
-                        }
-
-                        df.set(userInfo2);
-                    }
-                });
             }
 
             @Override
             public void onClick(View v) {
                 Workout product = productList.get(getAdapterPosition());
+                Intent intent = new Intent(mCtx, StudentList.class);
+                intent.putExtra("product", product);
+                mCtx.startActivity(intent);
             }
         }
     }

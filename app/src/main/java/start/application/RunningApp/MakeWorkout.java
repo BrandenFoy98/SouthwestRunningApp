@@ -61,10 +61,7 @@ public class MakeWorkout extends AppCompatActivity implements View.OnClickListen
 
             CollectionReference dbProducts = db.collection("products");
 
-            Workout product = new Workout(
-                    name,
-                    desc
-            );
+            Workout product = new Workout(name, desc);
 
             dbProducts.add(product)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

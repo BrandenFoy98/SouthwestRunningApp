@@ -88,6 +88,24 @@
         app:layout_constraintTop_toBottomOf="@+id/getworkoutListButton" />
 
     <Button
+        android:id="@+id/button2"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="111dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="48dp"
+        android:onClick="launchCompletedWorkouts"
+        android:text="@string/completed_workout"
+        android:textColor="#000000"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getworkoutListButton" />
+
+    <Button
         android:id="@+id/sign_out"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"

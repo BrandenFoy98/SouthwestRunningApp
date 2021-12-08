@@ -4,12 +4,12 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 
+
 public class Workout implements Serializable{
 
     @Exclude private String id;
 
     private String name, description;
-    private Boolean bool;
 
     public Workout() {
 

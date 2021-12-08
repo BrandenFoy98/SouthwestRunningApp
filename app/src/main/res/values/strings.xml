@@ -13,7 +13,9 @@
     <string name="makeworkout_view">Make Workout</string>
     <string name="getworkout_listview">Get Workouts</string>
     <string name="pictures_upload">Upload Pictures</string>
+    <string name="completed_workout">Completed Workout</string>
     <string name="SouthwestAbout">Southwest Cross Country is a 2A high school team located in eastern North Carolina.</string>
     <string name="SW_image_description" />
+    <string name="title_activity_student_list">StudentList</string>
 
 </resources>

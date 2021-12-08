@@ -2,6 +2,8 @@ package start.application.RunningApp;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.List;
+
 public class Upload {
     private String mName;
     private String mImageUri;
@@ -19,6 +21,7 @@ public class Upload {
         mName = name;
         mImageUri = imageUri;
     }
+
 
     public String getName() {
         return mName;

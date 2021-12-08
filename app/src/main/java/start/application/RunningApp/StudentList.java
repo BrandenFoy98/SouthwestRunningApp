@@ -1,56 +1,49 @@
 package start.application.RunningApp;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.application.RunningApp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class GetWorkoutRunner extends AppCompatActivity {
+public class StudentList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private WorkoutAdapter adapter;
-    private List<Workout> productList;
+    private StudentListWorkoutAdapter sAdapter;
+    private List<Student> productList;
     private ProgressBar progressBar;
-    CheckBox complete;
 
     private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_workout);
+        setContentView(R.layout.activity_completed_workouts);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressBar = findViewById(R.id.progressbar);
@@ -58,10 +51,8 @@ public class GetWorkoutRunner extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         productList = new ArrayList<>();
-        adapter = new WorkoutAdapter(this, productList);
-        complete = findViewById(R.id.workoutCompleted);
-        recyclerView.setAdapter(adapter);
-
+        sAdapter = new StudentListWorkoutAdapter(this, productList);
+        recyclerView.setAdapter(sAdapter);
         db = FirebaseFirestore.getInstance();
 
         db.collection("products").get()
@@ -77,11 +68,11 @@ public class GetWorkoutRunner extends AppCompatActivity {
 
                             for (DocumentSnapshot d : list) {
 
-                                Workout p = d.toObject(Workout.class);
+                                Student p = d.toObject(Student.class);
                                 p.setId(d.getId());
                                 productList.add(p);
                             }
-                            adapter.notifyDataSetChanged();
+                            sAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -102,31 +93,32 @@ public class GetWorkoutRunner extends AppCompatActivity {
         return true;
     }
 
-    public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ProductViewHolder> {
+    public class StudentListWorkoutAdapter extends RecyclerView.Adapter<StudentListWorkoutAdapter.ProductViewHolder> {
 
         private Context mCtx;
-        private List<Workout> productList;
+        private List<Student> productList;
 
-        public WorkoutAdapter(Context mCtx, List<Workout> productList) {
+        public StudentListWorkoutAdapter(Context mCtx, List<Student> productList) {
             this.mCtx = mCtx;
             this.productList = productList;
         }
 
         @NonNull
         @Override
-        public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ProductViewHolder(
-                    LayoutInflater.from(mCtx).inflate(R.layout.layout_product, parent, false)
+        public StudentListWorkoutAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new StudentListWorkoutAdapter.ProductViewHolder(
+                    LayoutInflater.from(mCtx).inflate(R.layout.layout_product2, parent, false)
             );
         }
 
         @Override
         public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-            Workout product = productList.get(position);
+            Student product = productList.get(position);
 
-            holder.textViewName.setText(product.getName());
-            holder.textViewDesc.setText(product.getDescription());
+            holder.textViewName.setText(product.getStudent());
         }
+
+
 
         @Override
         public int getItemCount() {
@@ -134,41 +126,20 @@ public class GetWorkoutRunner extends AppCompatActivity {
         }
 
         class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DocumentReference df = db.collection("completed").document(db.collection("products").document().getId());
 
             TextView textViewName, textViewDesc;
-            CheckBox complete;
 
             public ProductViewHolder(View itemView) {
                 super(itemView);
-                Map<String, String> userInfo2 = new HashMap<>();
 
                 textViewName = itemView.findViewById(R.id.textview_name);
                 textViewDesc = itemView.findViewById(R.id.textview_desc);
-                complete = itemView.findViewById(R.id.workoutCompleted);
 
                 itemView.setOnClickListener(this);
-                complete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (complete.isChecked()) {
-                            userInfo2.put("user_name", user.getEmail());
-                        }
-
-                        if (!(complete.isChecked())) {
-                            userInfo2.remove("user_name", user.getEmail());
-                        }
-
-                        df.set(userInfo2);
-                    }
-                });
             }
 
             @Override
             public void onClick(View v) {
-                Workout product = productList.get(getAdapterPosition());
             }
         }
     }
