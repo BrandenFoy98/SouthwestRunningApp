@@ -55,7 +55,7 @@ public class StudentList extends AppCompatActivity {
         recyclerView.setAdapter(sAdapter);
         db = FirebaseFirestore.getInstance();
 
-        db.collection("products").get()
+        db.collection("completed").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -117,8 +117,6 @@ public class StudentList extends AppCompatActivity {
 
             holder.textViewName.setText(product.getStudent());
         }
-
-
 
         @Override
         public int getItemCount() {

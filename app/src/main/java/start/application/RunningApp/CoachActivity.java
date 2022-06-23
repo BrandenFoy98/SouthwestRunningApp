@@ -134,8 +134,12 @@ public class CoachActivity extends AppCompatActivity {
     public void launchUploadPictures(View view) {
         startActivity(new Intent(this, UploadPicturesActivity.class));
     }
-    
+
     public void launchCompletedWorkouts(View view) {
         startActivity(new Intent(this, CompletedWorkoutsActivity.class));
+    }
+
+    public void launchLocation(View view) {
+        startActivity(new Intent(this, LocationActivity.class));
     }
 }

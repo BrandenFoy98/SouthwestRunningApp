@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="start.application.RunningApp.LocationActivity"
+            android:exported="false" />
+        <activity
             android:name="start.application.RunningApp.StudentList"
             android:exported="false" />
         <activity
